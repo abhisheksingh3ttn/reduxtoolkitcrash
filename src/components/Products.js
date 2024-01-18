@@ -1,26 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { add } from '../store/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts, STATUSES } from '../store/productSlice';
 
 const Products = () => {
-    const [products, setProducts] = useState([]);
+    const {data:products, status} = useSelector((state) => state.product);
+    const dispatch = useDispatch();
+   
     useEffect(()=> {
-        console.log(323232);
-        const fetchProducts = async () => {
-            const res =  await fetch('https://fakestoreapi.com/products');
-            const data = await res.json();
-            console.log(data);
-            setProducts(data);
-        }
-       fetchProducts();
-    },[])
+        dispatch(fetchProducts());
+    },[]);
+    const handleAdd = (product) => {
+        dispatch(add(product));
+    };
+
+    if(status === STATUSES.LOADING){
+        return <h2>Loading....</h2>
+    }
   return (
     <div className='productsWrapper'>
         {
         products.map(product => (
             <div className='card' key={product.id}>
-                <img src={product.image} />
+                <img src={product.image} alt='' />
                 <h4>{product.title}</h4>
                 <h4>{product.price}</h4>
-                <button className='btn'>Add to Cart</button>
+                <button className='btn' onClick={() => handleAdd(product)}>Add to Cart</button>
             </div>
         ))
         }
