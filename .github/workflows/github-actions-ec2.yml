@@ -33,7 +33,7 @@ on:
 jobs:
   deploy:
     name: Deploy to EC2 on master branch push
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     environment: production
 
     steps:
@@ -60,6 +60,3 @@ jobs:
     # build the react app
     - name: Build
       run: npm run build
-    # start the react app
-    - name: Start
-      run: npm run start
