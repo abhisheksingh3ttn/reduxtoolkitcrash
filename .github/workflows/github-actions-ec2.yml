@@ -34,7 +34,6 @@ jobs:
   deploy:
     name: Deploy to EC2 on master branch push
     runs-on: self-hosted
-    environment: production
 
     steps:
     - name: Checkout
