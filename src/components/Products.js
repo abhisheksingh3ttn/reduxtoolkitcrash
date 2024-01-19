@@ -6,7 +6,7 @@ import { fetchProducts, STATUSES } from '../store/productSlice';
 const Products = () => {
     const {data:products, status} = useSelector((state) => state.product);
     const dispatch = useDispatch();
-   
+   // eslint-disable-next-line 
     useEffect(()=> {
         dispatch(fetchProducts());
     },[]);
