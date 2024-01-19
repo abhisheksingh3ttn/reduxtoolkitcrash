@@ -73,3 +73,6 @@ jobs:
     # build the react app
     - name: Build
       run: npm run build
+    # start the react app
+    - name: Start
+      run: npm run start
